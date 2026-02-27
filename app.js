@@ -9,7 +9,7 @@ app.get("/",(req,res) => {
         res.redirect("/login")
 })
 app.get("/login",(req,res) => {
-        res.status(200).sendFile(location.resolve(__dirname,"./login_page_files/login (1).html"))
+        res.status(200).sendFile(location.resolve(__dirname,"./website_test/login_page_files/login (1).html"))
 })
 app.post("/api/login",(req,res) =>{
         const {username, password} = req.body
@@ -19,7 +19,7 @@ app.post("/api/login",(req,res) =>{
         }
 })
 app.get("/dashboard",(req,res)=>{
-    res.sendFile(location.resolve(__dirname,"./dashboard_files/dashboard (1).html"))
+    res.sendFile(location.resolve(__dirname,"./website_test/dashboard_files/dashboard (1).html"))
 })
 
 app.listen(process.env.PORT, () => {
