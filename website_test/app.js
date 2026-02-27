@@ -22,7 +22,7 @@ app.get("/dashboard",(req,res)=>{
     res.sendFile(location.resolve(__dirname,"./dashboard_files/dashboard (1).html"))
 })
 
-app.listen(5000, () => {
+app.listen(process.env.PORT, () => {
     console.log("Server listening on port 5000")
 })
 
