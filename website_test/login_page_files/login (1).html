@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg: #0a0a0a;
+            --surface: #111111;
+            --border: #222222;
+            --accent: #e8ff47;
+            --text: #f0f0f0;
+            --muted: #666666;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        /* Background grid */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: 
+                linear-gradient(rgba(232,255,71,0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(232,255,71,0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            pointer-events: none;
+        }
+
+        .container {
+            display: flex;
+            width: 900px;
+            min-height: 560px;
+            border: 1px solid var(--border);
+            animation: fadeUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Left panel */
+        .left {
+            flex: 1;
+            background: var(--accent);
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left::after {
+            content: 'TODO';
+            position: absolute;
+            bottom: -20px;
+            right: -10px;
+            font-family: 'Syne', sans-serif;
+            font-size: 120px;
+            font-weight: 800;
+            color: rgba(0,0,0,0.08);
+            line-height: 1;
+            pointer-events: none;
+        }
+
+        .logo {
+            font-family: 'Syne', sans-serif;
+            font-weight: 800;
+            font-size: 22px;
+            color: #0a0a0a;
+            letter-spacing: -0.5px;
+        }
+
+        .left-content h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: #0a0a0a;
+            line-height: 1.1;
+            letter-spacing: -1px;
+            margin-bottom: 16px;
+        }
+
+        .left-content p {
+            font-size: 15px;
+            color: rgba(0,0,0,0.55);
+            line-height: 1.6;
+            max-width: 260px;
+        }
+
+        /* Right panel */
+        .right {
+            flex: 1;
+            background: var(--surface);
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .right h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .right p.sub {
+            font-size: 14px;
+            color: var(--muted);
+            margin-bottom: 36px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 12px;
+            font-weight: 500;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: var(--muted);
+            margin-bottom: 8px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--text);
+            font-family: 'DM Sans', sans-serif;
+            font-size: 15px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        input:focus {
+            border-color: var(--accent);
+        }
+
+        input::placeholder {
+            color: #333;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 15px;
+            background: var(--accent);
+            color: #0a0a0a;
+            border: none;
+            font-family: 'Syne', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            margin-top: 8px;
+            transition: opacity 0.2s, transform 0.1s;
+        }
+
+        .btn-login:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        .btn-login:active {
+            transform: translateY(0);
+        }
+
+        .error-msg {
+            display: none;
+            color: #ff4747;
+            font-size: 13px;
+            margin-top: 12px;
+            padding: 10px 14px;
+            background: rgba(255,71,71,0.08);
+            border-left: 2px solid #ff4747;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 24px 0;
+        }
+
+        .divider::before, .divider::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .divider span {
+            font-size: 12px;
+            color: var(--muted);
+        }
+
+        .signup-link {
+            text-align: center;
+            font-size: 13px;
+            color: var(--muted);
+        }
+
+        .signup-link a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="logo">● TASKR</div>
+            <div class="left-content">
+                <h1>Get things done.</h1>
+                <p>Your personal task manager. Simple, fast, and always in sync.</p>
+            </div>
+        </div>
+        <div class="right">
+            <h2>Welcome back</h2>
+            <p class="sub">Enter your credentials to continue</p>
+
+            <div class="form-group">
+                <label>Username</label>
+                <input type="text" id="username" placeholder="your username" />
+            </div>
+
+            <div class="form-group">
+                <label>Password</label>
+                <input type="password" id="password" placeholder="••••••••" />
+            </div>
+
+            <button class="btn-login" onclick="login()">Login →</button>
+
+            <div class="error-msg" id="error-msg">Invalid username or password.</div>
+
+            <div class="divider"><span>or</span></div>
+
+            <p class="signup-link">Don't have an account? <a href="#">Sign up</a></p>
+        </div>
+    </div>
+
+    <script src="./login_page_files/login.js">
+    </script>
+</body>
+</html>
